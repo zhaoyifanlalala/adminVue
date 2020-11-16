@@ -23,7 +23,7 @@
     </div>
     <div class="pie">
       <div
-        id="pieOptions"
+        class="pieOptions"
         :style="{width: '800px', height: '300px'}"
       ></div>
     </div>
@@ -50,6 +50,7 @@ export default {
          date:[],
          pieData: [],
          seriesData: [],
+         seriesPieData:[],
          start:'',
          end:'',
 
@@ -92,7 +93,7 @@ export default {
 
 
    methods: {
-     ...mapActions(['loadOrder']),
+     ...mapActions(['loadOrder',]),
 
       async dateChange (value){
         console.log('value',value);
@@ -104,9 +105,8 @@ export default {
           end:value[1].toString(),
         })
         this.dailyOrder();
-        this.pieChart()
-        // console.log(test);
-        // console.log(_.map(this.dailyOrder(),(item)=>item.count))
+        this.pieChart();
+        this.pieOptions();
       },
 
       drawLine(){
@@ -126,7 +126,7 @@ export default {
             },
             series: [{
                 type: 'line',
-                data: this.seriesData
+                data: this.seriesData // [{name:'',value:''}]
             }]
         });
       },
@@ -138,13 +138,38 @@ export default {
                {
                   type: 'pie',
                   radius: '55%',
-                  center: [ '40%', '50%' ],
+                  center: [ '60%', '50%' ],
                   data: this.seriesData,
+                  label:{
+                    show:true,
+                    formatter:'{b} : {c} ({d}%)'
+                  }
                }
             ]
          };
          pieChart.setOption(option);
       },
+
+      // pieOptions
+      pieOptions () {
+         let pieOptions = this.$echarts.init(document.getElementsByClassName('pieOptions')[0]);
+         let option = {
+            series: [
+               {
+                  type: 'pie',
+                  radius: '55%',
+                  center: [ '60%', '50%' ],
+                  data: this.seriesPieData,
+                  label:{
+                    show:true,
+                    formatter:'{b} : {c} ({d}%)'
+                  }
+               }
+            ]
+         };
+         pieOptions.setOption(option);
+      },
+
 
       daily() {
         // console.log('========in======')
@@ -155,7 +180,7 @@ export default {
         });
         this.date = dateArr;
         // console.log(this.date)
-        this.pieData = newDataArr
+        // this.pieData = newDataArr
       },
       
       dailyOrder(){
@@ -191,29 +216,62 @@ export default {
         console.log("订单量====>", newArr);
         console.log('datedatedatedate',this.date)
         let arr2 = [];
-      _.forEach(this.date, i => {
-        _.forEach(newArr, j => {
-          if (j.date === i) {
-            arr2.push({
-              date: i,
-              count: j.count
-            });
-          } else {
-            arr2.push({
-              date: i,
-              count: 0
-            });
-          }
+        _.forEach(this.date, i => {
+          _.forEach(newArr, j => {
+            if (j.date === i) {
+              arr2.push({
+                date: i,
+                count: j.count
+              });
+            } else {
+              arr2.push({
+                date: i,
+                count: 0
+              });
+            }
+          });
         });
-      });
-      // console.log(arr2)
-      let a = computeArr(arr2);
-      console.log("处理过的最终数据=====.>", a);
-    
-        // return newArr
-        this.seriesData=_.map(computeArr(arr2),item=>item.count)
+        // console.log(arr2)
+        let a = computeArr(arr2);
+        console.log("处理过的最终数据=====.>", a);
+
+        this.seriesData=_.map(computeArr(arr2),(item)=>{
+          return {
+              name:item.date,
+              value :item.count
+            };
+        });
 
 
+        let namePie = _.groupBy(this.list,'user.username');
+        _.forEach(namePie , (item)=>{
+          if(item[0].user !== null){
+            this.seriesPieData.push({
+              name:item[0].user.username, 
+              value:item.length
+            })
+          }else{
+            this.seriesPieData.push({
+              name:'undefined', 
+              value:item.length
+            })
+          }
+
+          // if(item[0].user == null){
+          //   this.seriesPieData.push({
+          //     username:'null',
+          //     value:item.length
+          //   })
+          //   console.log(1111);
+          // }else{
+          //   console.log(item[0].user.username);
+          //   this.seriesPieData.push({
+          //     username:item[0].user.username, 
+          //     value:item.length
+          //   })
+          //   console.log(2222);
+          // }
+        })
         this.drawLine()
       },
 
