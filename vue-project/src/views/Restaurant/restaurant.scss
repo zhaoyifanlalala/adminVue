@@ -1,0 +1,22 @@
+.restaurant-container{
+    margin-top : 80px;
+    margin-right : 50px;
+    margin-left : 50px;
+}
+.el-table, .el-table__expanded-cell {
+    background-color : #1f1f1f;
+}
+.el-table {
+    position : relative;
+    box-sizing : border-box;
+    flex : 1;
+    width : 100%;
+    max-width : 100%;
+    overflow : hidden;
+    font-size : 14px;
+    // color : #fff;
+}
+.restTags{
+    margin-bottom : 5px;
+    margin-left : 5px;
+}

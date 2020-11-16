@@ -1,0 +1,110 @@
+.el-header, .el-footer {
+    line-height : 70px;
+    color : #fff;
+    text-align : center;
+    background-color : #1f1f1f;
+  }
+  
+  .el-aside {
+    height : 100vh;
+    line-height : 200px;
+    color : #fff;
+    text-align : center;
+    background-color : #1f1f1f;
+  }
+  
+  .el-main {
+    height : calc(100vh - 60px);
+    // line-height : 160px;
+    color : #fff;
+    // text-align : center;
+    background-color : rgb(41, 40, 40);
+  }
+
+  el-menu-item{
+      color : #fff;
+  }
+  
+  body > .el-container {
+    margin-bottom : 40px;
+  }
+  
+  .el-container:nth-child(5) .el-aside,
+  .el-container:nth-child(6) .el-aside {
+    line-height : 260px;
+  }
+  
+  .el-container:nth-child(7) .el-aside {
+    line-height : 320px;
+  }
+
+  .logo{
+    display : flex;
+    align-items : center;
+    justify-content : center;
+    height : 120px;
+  }
+
+  .logoImg{
+    height : 60px;
+    -webkit-filter : invert(100%) sepia(0) saturate(5338%) hue-rotate(117deg) brightness(110%) contrast(101%);
+    filter : invert(100%) sepia(0) saturate(5338%) hue-rotate(117deg) brightness(110%) contrast(101%);
+  }
+
+  .el-menu-vertical-demo:not(.el-menu--collapse) {
+    width : 200px;
+    min-height : 600px;
+    background : #1f1f1f;
+  }
+.el-menu{
+    background : #1f1f1f;
+    border : none;
+}
+
+.el-radio-button__inner {
+    width : 50px;
+    color : #FFF;
+    background-color : #1f1f1f;
+    border : none;
+    border-radius : 4px;
+    outline : none;
+}
+.el-radio-button__orig-radio:checked+.el-radio-button__inner {
+    width : 50px;
+    color : #FFF;
+    background-color : #1f1f1f;
+    border : none;
+    border-radius : 4px;
+    outline : none;
+}
+.el-radio-button:first-child .el-radio-button__inner {
+    border-left : 1px solid #1f1f1f;
+}
+.el-radio-button__orig-radio:checked+.el-radio-button__inner {
+    box-shadow : -1px 0 0 0 #1f1f1f;
+}
+
+.router-link{
+  list-style : none;
+}
+.router-link:hover{
+  color : #000000;
+}
+.el-menu-item:focus, .el-menu-item:hover {
+  background-color : #000000;
+  outline : 0;
+}
+.el-breadcrumb__item:last-child .el-breadcrumb__inner{
+  font-weight : 400;
+  color : #fff;
+  cursor : text;
+}
+.cell{
+  color : #000000;
+}
+
+.logout-btn{
+  width :60px;
+  height : 40px;
+  margin-bottom : 10px;
+}
