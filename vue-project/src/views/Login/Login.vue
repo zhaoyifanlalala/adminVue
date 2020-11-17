@@ -16,6 +16,7 @@
         <el-input
           v-model="loginForm.username"
           type="text"
+          class="login-input"
         ></el-input>
       </el-form-item>
 
@@ -27,6 +28,7 @@
         <el-input
           v-model="loginForm.password"
           type="password"
+          class="login-input"
         ></el-input>
       </el-form-item>
 
@@ -39,24 +41,18 @@
         </el-button>
 
         <el-button @click="drawer = true">
-          显示
+          显示登录信息
         </el-button>
         <!-- 登录提示 -->
         <el-drawer
           :visible.sync="drawer"
-          direction="rtl"
         >
-          <template slot="title">
-            <span :style="{fontSize: '16px'}">可选用户名</span>
-          </template>
-
           <el-card
-            v-for=" item in loginMsg"
+            v-for="item in loginMsg"
             :key="item.id"
-            class="box-card login-card"
-            shadow="always"
+            class="login-card"
           >
-            <p>{{ item.identity }}</p>
+            <p>{{ item.role }}</p>
             <p>username: {{ item.username }}</p>
             <p>password: {{ item.password }}</p>
           </el-card>
@@ -70,6 +66,7 @@
 import './login.scss';
 import { mapActions } from 'vuex';
 import _ from 'lodash';
+
 export default {
    name: 'Login',
    data (){
@@ -87,12 +84,12 @@ export default {
                { required: true, message: '请输入密码', trigger: 'blur' }
             ],
          },
-         drawer: false,
          loginMsg: [
-            { id: Math.random() ,identity: '管理员', username: 'admin', password: '随意' },
-            { id: Math.random() ,identity: '部门员工', username: 'employee', password: '随意' },
-            { id: Math.random() ,identity: '游客', username: 'visitor', password: '随意' }
-         ]
+            { id: Math.random() ,role: '管理员', username: 'admin', password: '随意' },
+            { id: Math.random() ,role: '部门员工', username: 'employee', password: '随意' },
+            { id: Math.random() ,role: '游客', username: 'visitor', password: '随意' }
+         ],
+         drawer: false,
       };
    },
    methods: {
@@ -108,11 +105,9 @@ export default {
                   username: this.loginForm.username,
                   password: this.loginForm.password
                });
-            }else{
-               this.$message.error('密码不正确.');
             }
          }else{
-            this.$message.error('用户名不正确.');
+            this.$message.error('用户名不正确,请重新输入');
          }
       }
    },
