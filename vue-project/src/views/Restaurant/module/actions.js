@@ -32,7 +32,6 @@ const actions = {
       commit(types.SHOW_LOADING);
       try {
          await changeRestInfo(data);
-         // commit(types.SET_REST_LIST,result);
       } catch (error) {
          // this._vm.$message('error',{ message:error.message });
       }finally{

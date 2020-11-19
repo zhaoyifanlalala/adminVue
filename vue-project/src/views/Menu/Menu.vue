@@ -58,7 +58,7 @@
           <template slot-scope="scope">
             <el-switch
               v-model="scope.row.available"
-              :disabled="isEmployee === true ? true : false"
+              :disabled="$permission()"
               @change="handleSwitch(scope.row)"
             >
             </el-switch>
@@ -115,6 +115,7 @@ export default {
          // setStorage('resId',id);
          this.id = val
          this.keyword = '';
+         this.currentPage = 1;
          this.tableData();
          this.$refs.searchValue.value = "";
          console.log('val',val);
@@ -176,13 +177,13 @@ export default {
       }),
 
       // 判断是否为员工身份
-      isEmployee (){
-         if(_.get(getStorage('userInfo'),'role') === ('employee' || 'visitor')){
-            return true;
-         }else{
-            return false;
-         }
-      }
+      // isEmployee (){
+      //    if(_.get(getStorage('userInfo'),'role') === ('employee' || 'visitor')){
+      //       return true;
+      //    }else{
+      //       return false;
+      //    }
+      // }
    },
    created () {
       // 根据餐馆名获取menu 

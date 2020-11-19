@@ -80,11 +80,16 @@
         <el-header></el-header>
         <el-main>
           <el-breadcrumb separator-class="el-icon-arrow-right">
-            <el-breadcrumb-item>
+            <!-- <el-breadcrumb-item>
               Admin
             </el-breadcrumb-item>
             <el-breadcrumb-item class="router-name">
-              {{ routeName }}
+              {{ routeName }} -->
+            <el-breadcrumb-item
+              v-for="(item,index) in routeName"
+              :key="index"
+            >
+              <span>{{ item }}</span>
             </el-breadcrumb-item>
           </el-breadcrumb>
           <router-view></router-view>
@@ -111,7 +116,8 @@ export default {
    },
    computed: {
       routeName (){
-         return this.$route.name;
+         //  return this.$route.name;
+         return this.$route.path.split('/').slice(1);
       },
       isVisitor (){
          if(_.get(getStorage('userInfo'),'role') === 'visitor'){

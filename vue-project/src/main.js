@@ -2,6 +2,7 @@ import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
 import store from './store';
+import { getStorage } from '@/common/utils';
 /* 引入 vue-i18n */
 import VueI18n from 'vue-i18n';
 
@@ -10,10 +11,18 @@ import 'element-ui/lib/theme-chalk/index.css';
 
 // 引入echarts
 import echarts from 'echarts';
+// import { from } from 'core-js/fn/array';
 Vue.prototype.$echarts = echarts;
 
 // import ECharts from 'vue-echarts';
 // Vue.component('v-chart', ECharts);
+
+Vue.prototype.$permission = function (){
+   const role = getStorage('userInfo').role;
+   if(role !== 'admin'){
+      return true;
+   }
+};
 
 Vue.config.productionTip = false;
 Vue.use(ElementUI);
