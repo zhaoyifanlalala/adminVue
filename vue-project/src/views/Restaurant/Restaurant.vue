@@ -86,7 +86,7 @@
       :form="form"
       :tags="tags"
       :dialog-form-visible="dialogFormVisible"
-      @closeResModal1="test"
+      @closeResModal1="closeBox"
     />
   </div>
 </template>
@@ -118,7 +118,7 @@ export default {
         'setRestList','loadTags','changeRestModel',
     ]),
 
-        test(){
+        closeBox(){
           this.dialogFormVisible = false;
         },
         // 点击编辑按钮
