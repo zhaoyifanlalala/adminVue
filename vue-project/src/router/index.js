@@ -21,11 +21,11 @@ const routes = [
          }
       }
    },
-   // {
-   //    path: '/',
-   //    name: '/',
-   //    redirect: '/login',
-   // },
+   {
+      path: '/',
+      name: '/',
+      redirect: '/admin',
+   },
    {
       path: '/admin',
       name: 'admin',
